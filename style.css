@@ -1,0 +1,47 @@
+/* reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    }
+
+    body{
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+.navbar-brand{
+    text-decoration: none;
+    color: red;
+    border: 1rem;
+    border-color: rgb(33 37 41);
+    font-size: 2rem;
+    font-weight: bold;
+    /* -webkit-text-stroke: 2px rgb(33 37 41);
+    text-shadow: -1px 1px 14px rgb(255, 0, 0); */
+}
+
+.navbar-brand img{
+    box-shadow: -1px 1px 14px rgb(255, 0, 0);
+}
+
+/* Difuminado del menu hamburguesa */
+/* .navbar-toggler{
+    box-shadow: -1px 1px 14px rgb(255, 0, 0);
+} */
+
+.tdcenter span{
+    
+        margin: 0 1.4rem;
+    
+}
+
+footer{
+    margin-top: auto;
+}
+/* 
+footer a img{
+        box-shadow: -1px 1px 14px rgb(255, 0, 0);
+    } */
+
