@@ -16,7 +16,7 @@ function registrar(){
     let telefonoRegistro = document.getElementById("tel").value;
     let fechaRegistro = document.getElementById("fecha").value;
     let mesesPagosRegistro = document.getElementById("cantidadMeses").value;
-    let vencimientoMembresia = sumaDias(mesesPagosRegistro);
+    let vencimientoMembresia = sumaDias(fechaRegistro, mesesPagosRegistro);
     
     
     nuevoCliente = new Cliente(nombreRegistro,apellidoRegistro,dniRegistro,telefonoRegistro,fechaRegistro,mesesPagosRegistro, vencimientoMembresia);
@@ -32,8 +32,8 @@ contadorCliente = 1;
 let momento = moment().format("DD - MM - YYYY");
 console.log(momento)
 
-// 2° Función para sumar 1 mes a la membresía
-function sumaDias(meses){
+// 2° Función para sumar X meses a la membresía
+function sumaDias(fechaRegistro, meses){
     const fechaVencimiento = moment().add(meses, 'month')
     const fechaFinal = fechaVencimiento.format("DD - MM - YYYY");
     console.log(fechaFinal);
@@ -47,14 +47,31 @@ document.getElementById("btnCancelar").addEventListener("click",function(nodefau
         nodefault.preventDefault()});
 
 // poniendo fecha de hoy al input de fecha de inscripción
-document.getElementById("inputFecha").innerHTML = "<input type='text' class='form-control' id='fecha' value='"+momento+"'>"; // "disabled" sin comillas después de value para bloquear la edición del input -------------------------------------------------
+document.getElementById("inputFecha").innerHTML = "<input type='text' class='form-control' id='fecha' value='"+momento+"'disabled>"; // "disabled" sin comillas después de value para bloquear la edición del input -------------------------------------------------
 
 let listaClientes = [];
 function agregar(){
+    if ((momento >= nuevoCliente.fecha) && (momento <= nuevoCliente.vencimientoMembresia)){
+        estado = true;
+    }
+    
+    // if (estado = true){
+    //     estadoM = "✔ OK";
+    // } else {
+    //     estadoM = "🚩 NO ACTIVA";
+    // }
+
+    let estadoM = (estado = true) ? "✔ OK" :
+        (estado = false) ? "🚩 NO ACTIVA" :
+
     listaClientes.push(nuevoCliente);
     console.log(listaClientes);
-    document.getElementById("listaDeClientes").innerHTML += "<tr><th scope='row'>"+(contadorCliente++)+"</th><td>"+nuevoCliente.nombre+"</td><td>"+nuevoCliente.apellido+"</td><td>"+nuevoCliente.dni+"</td><td>"+nuevoCliente.telefono+"</td><td>"+nuevoCliente.fecha+"</td><td>FULL</td><td>✔ OK</td><td >"+nuevoCliente.vencimientoMembresia+"</td><td class='tdcenter administrar'><button class='btn' id='deleteUser'>❌</button><button class='btn' id='modifiedUser'>🛠</button></td></tr>";
+    document.getElementById("listaDeClientes").innerHTML += "<tr><th scope='row'>"+(contadorCliente++)+"</th><td>"+nuevoCliente.nombre+"</td><td>"+nuevoCliente.apellido+"</td><td>"+nuevoCliente.dni+"</td><td>"+nuevoCliente.telefono+"</td><td>"+nuevoCliente.fecha+"</td><td>FULL</td><td id='estado'>"+estadoM+"</td><td >"+nuevoCliente.vencimientoMembresia+"</td><td class='tdcenter administrar'><button class='btn' id='deleteUser'>❌</button><button class='btn' id='modifiedUser'>🛠</button></td></tr>";
+
+
 }
+
+
 
 // Buscador de miembros para registrar nuevo pago
 // const dniEncontrado = listaClientes.some(buscadorDni => nuevoCliente.dni === document.getElementById("dniBuscado").value);
